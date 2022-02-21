@@ -1,10 +1,12 @@
 import ReactDOM from 'react-dom';
-import UserSearch from './state/UserSearch';
+// import EventComponent from './events/EventComponent';
+// import UserSearch from './state/UserSearch';
+import UserSearch from './classes/UserSearch';
 
 
 const App = () => {
   return <div>
-    <UserSearch />
+    <UserSearch users={[{name: 'kingsley', age: 34}]} />
   </div>
 };
 
