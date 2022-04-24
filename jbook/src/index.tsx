@@ -12,7 +12,8 @@ const App = () => {
   const startService = async () => {
     const service = await esbuild.startService({
       worker: true,
-      wasmURL: '/esbuild.wasm' // go to public/ folder and find a file named esbuild.wasm. We copied this file from node_modules/esbuild-wasm/
+      wasmURL: 'https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm'
+      // wasmURL: '/esbuild.wasm' // go to public/ folder and find a file named esbuild.wasm. We copied this file from node_modules/esbuild-wasm/
     });
 
     ref.current = service;
