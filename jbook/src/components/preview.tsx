@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 
 interface PreveiwProps {
   code: string;
+  bundlingErr: string;
 }
 
 const html = `
@@ -13,13 +14,21 @@ const html = `
   <body>
     <div id="root"></div>
     <script>
+      const handleErr = (err) => {
+        const root = document.querySelector('#root');
+        root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>';
+        console.error(err);
+      };
+
+      window.addEventListener('error', (event) => {
+        event.preventDefault();
+        handleErr(event.error);
+      })
       window.addEventListener('message', (event) => {
         try {
           eval(event.data);
         } catch(err) {
-          const root = document.querySelector('#root');
-          root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>';
-          console.error(err);
+          handleErr(err);
         }
       }, false)
     </script>
@@ -27,7 +36,7 @@ const html = `
 </html>
 `;
 
-const Preview: React.FC<PreveiwProps> = ({ code }) => {
+const Preview: React.FC<PreveiwProps> = ({ code, bundlingErr }) => {
   const iframe = useRef<any>();
 
   useEffect(() => {
@@ -45,6 +54,7 @@ const Preview: React.FC<PreveiwProps> = ({ code }) => {
         sandbox="allow-scripts"
         srcDoc={html}
       />
+      {bundlingErr && <div className="preview-error">{bundlingErr}</div>}
     </div>
   );
 };
