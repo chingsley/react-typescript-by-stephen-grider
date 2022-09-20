@@ -31,9 +31,10 @@ const Preview: React.FC<PreveiwProps> = ({ code }) => {
   const iframe = useRef<any>();
 
   useEffect(() => {
-    iframe.current.srcdoc = html; // html is declared below, before the 'return'
-    iframe.current.contentWindow.postMessage(code, '*');
-    // iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*');
+    iframe.current.srcdoc = html;
+    setTimeout(() => {
+      iframe.current.contentWindow.postMessage(code, '*');
+    }, 50)
   }, [code]);
 
   return (
