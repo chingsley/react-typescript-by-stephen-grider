@@ -1,0 +1,51 @@
+.add-cell {
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.3s ease-in 0.1s;
+  margin: 10px 0;
+}
+
+.add-cell:hover {
+  opacity: 1.0;
+}
+
+.add-cell .divider{
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  right: 2.5%;
+  left: 2.5%;
+  width: 90%;
+  border-bottom: 1px solid gray;
+  z-index: -1;
+}
+
+.add-cell .add-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.add-cell .add-buttons button {
+  margin: 0 40px;
+}
+
+ /* 
+  notice there's not space between the class names
+  instead they're separated by a dot. The reason is that
+  the two class names 'add-cell' and 'force-visible' are on the
+  same element. In such case you cannot add a space between the classNames:
+  <div className='add-cell force-visible'>
+  </div>
+  => .add-cell.force-visible {}
+  
+  You only add a space if the 2nd class is in a child element
+  of the the first class. E.g 
+  <div className='add-cell>
+    <div calssName='force-visible'>
+    </div>
+  </div>
+  => .add-cell .force-visible {}
+ */
+.add-cell.force-visible {
+  opacity: 1.0;
+}
